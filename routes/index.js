@@ -42,13 +42,13 @@ router.post(
 
     /* -- GET --*/
 
-router.get('/signin', (req, res) => {
-  res.render('signin', { title: 'signin' });
+router.get('/signup', (req, res) => {
+  res.render('signup', { title: 'signup' });
 });
 
     /* -- POST --*/
 router.post(
-    '/signin',
+    '/signup',
     form(
         field("name").required(),
         field("surname").required(),
@@ -67,12 +67,15 @@ router.post(
             console.log("surname:", req.form.surname);
             console.log("username:", req.form.username);
             console.log("type:", req.form.type);
-            // TODO insérer le nouveau user dans la bdd
-            // TODO gérer le cas où username est déjà utilisé
-
-
+            var name = req.form.name;
+            var surname = req.form.surname;
+            var username = req.form.username;
+            var type = req.form.type;
+            db.query('INSERT INTO users (name,surname,username,type)) VALUES ($1,$2,$3,$4)', [name,surname,username,type],(err, datares) => {
+                if (err) throw err;
+                res.render('index', {title:"update ok"});
+            });
         }
-        res.render('index', {title:"signin ok"});
     });
 
 /* update-id page. */
@@ -200,6 +203,10 @@ router.delete('/user',(req,res)=>{
 
 router.get('/admin',(req,res)=>{
   res.render('index', { title: 'the marauder webpage' });
+});
+
+router.get('/map',(req,res)=>{
+  res.render('map');
 });
 
 module.exports = router;
