@@ -33,14 +33,13 @@
 	}).addTo(mymap);
 
 	function addUsers(){
-		var users;
 		$.get( "https://marauder-mines-nancy.herokuapp.com/user/2", function( data ) {
-		  users=data;
+			console.log(users);
+			for (var i = 0;i<data.nombre;i++){
+				addUser(data.rows.lat,data.rows.long,data.rows.username);
+			}
 		},"json");
-		console.log(users);
-		for (var i = 0;i<data.nombre;i++){
-			addUser(data.rows.lat,data.rows.long,data.rows.username)
-		}
+
 	}
 
 	function addUser(lat,long,username){
