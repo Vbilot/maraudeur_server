@@ -23,6 +23,19 @@ router.get('/',(req,res)=> {
 });
 
 
+router.get('/2',(req,res)=> {
+    // aller chercher data dans la base de donné
+
+    db.query('SELECT * FROM users', (err, response) => {
+        if (err) throw err;
+        data={
+          rows:response.rows,
+          nombre:response.rowCount
+        }
+        res.send(data);
+    });
+});
+
 
 
 module.exports = router;
