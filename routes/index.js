@@ -71,7 +71,7 @@ router.post(
             var surname = req.form.surname;
             var username = req.form.username;
             var type = req.form.type;
-            db.query('INSERT INTO users (name,surname,username,type) VALUES ($1,$2,$3,$4)', [name,surname,username,type],(err, datares) => {
+            db.query('INSERT INTO users (name,surname,username,type,lat,long,floor,online) VALUES ($1,$2,$3,$4,0,0,0,true)', [name,surname,username,type],(err, datares) => {
                 if (err) throw err;
                 res.render('index', {title:"update ok"});
             });
