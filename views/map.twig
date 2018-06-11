@@ -34,7 +34,7 @@
 
 	function addUsers(){
 		$.get( "https://marauder-mines-nancy.herokuapp.com/user/2", function( data ) {
-			console.log(users);
+			console.log(data);
 			for (var i = 0;i<data.nombre;i++){
 				addUser(data.rows.lat,data.rows.long,data.rows.username);
 			}
