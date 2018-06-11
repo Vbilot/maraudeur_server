@@ -1,5 +1,10 @@
 var express = require('express');
 var router = express.Router();
+const db = require('../db/myPostGreSQLClient');
+
+let form = require('express-form'),
+    field = form.field;
+
 
 
 router.get('/',(req,res)=> {
