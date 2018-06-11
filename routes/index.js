@@ -7,36 +7,6 @@ const db = require('../db/myPostGreSQLClient');
 let form = require('express-form'),
     field = form.field;
 
-/* Client page. */
-
-    /* -- GET --*/
-router.get('/client', (req, res) => {
-  res.render('client', { title: 'Client' });
-});
-
-    /* -- POST --*/
-router.post(
-    '/client',
-    form(
-        field("latitude").required().is(/^[0-9]+.?[0-9]*/),
-        field("longitude").required().is(/^[0-9]+.?[0-9]*/),
-    ),
-    (req, res) => {
-
-        if (!req.form.isValid) {
-            // Handle errors
-            console.log(req.form.errors);
-
-        } else {
-            // Or, use filtered form data from the form object:
-            console.log("Latitude:", req.form.latitude);
-            console.log("Longitude:", req.form.longitude);
-
-
-        }
-        res.render('index', {title:"test ça"});
-    });
-
 
 /* Signin page. */
 
@@ -150,24 +120,6 @@ router.post(
             });
         }
     });
-
-
-
-
-router.get('/user',(req,res)=> {
-    // aller chercher data dans la base de donné
-
-    db.query('SELECT * FROM users', (err, datares) => {
-        if (err) throw err;
-        var str = '';
-        for (let row of datares.rows) {
-            console.log(JSON.stringify(row));
-            str = str + JSON.stringify(row);
-            res.write(JSON.stringify(row));
-        }
-    res.send();
-    });
-})
 
 
 /*
