@@ -43,6 +43,7 @@
 	}
 
 	function addUser(lat,long,username){
+		//TODO ne pas ajouter le user si il n'est pas à artem
 		var marker = L.marker([lat, long]).addTo(mymap);
 		marker.bindPopup(username).openPopup();
 	}
