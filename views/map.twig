@@ -6,6 +6,7 @@
 
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin=""/>
@@ -30,6 +31,24 @@
 			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
 		id: 'mapbox.streets'
 	}).addTo(mymap);
+
+	function addUsers(){
+		var users;
+		$.get( "https://marauder-mines-nancy.herokuapp.com/user", function( data ) {
+		  users=data;
+		});
+		console.log(users);
+		for (user in users){
+			addUser(user.lat,user.long,user.username)
+		}
+	}
+
+	function addUser(lat,long,username){
+		var marker = L.marker([lat, long]).addTo(mymap);
+		marker.bindPopup(username).openPopup();
+	}
+
+
 
 </script>
 
